@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Authentication POC</title>
+    <style>
+        #video {
+            width: 100%;
+            height: auto;
+        }
+        #status {
+            font-size: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Face Authentication POC</h1>
+    <video id="video" autoplay></video>
+    <div id="status">Waiting for face authentication...</div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
