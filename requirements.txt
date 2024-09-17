@@ -2,3 +2,5 @@ Flask
 cryptography
 python-dotenv
 requests
+face_recognition
+pillow
