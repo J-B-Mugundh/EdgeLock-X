@@ -4,103 +4,193 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Face Authentication POC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7); /* Semi-transparent background for header */
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: black;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1; /* Ensure it is above the background video */
+        }
+
+        header img {
+            max-width: 15%;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            position: relative;
+            z-index: 2; /* Ensure it is above the background video */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
         h1 {
-            text-align: center;
-            color: #333;
+            margin-top: 20px;
+            color: black;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* Adding the background video */
+        #background-video {
             position: absolute;
-            top: 20px;
-            width: 100%;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 0; /* Behind other elements */
         }
 
         .container {
             display: flex;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            width: 90%;
             overflow: hidden;
-            max-width: 800px;
-            width: 100%;
+            margin-top: 20px; /* Space between header and authentication section */
+            z-index: 1;
         }
 
         .column {
             flex: 1;
-            padding: 20px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         .form-column {
-            background-color: #f4f4f9;
+            background-color: #f0f4ff;
+            border-radius: 20px 0 0 20px;
+            padding: 40px;
         }
 
         .camera-column {
-            background-color: #fff;
+            background-color: white;
+            padding: 40px;
+            border-radius: 0 20px 20px 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             margin-bottom: 20px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 10px; /* Adjust this value to move the icon */
+            top: 35%; /* Center the icon vertically */
+            transform: translateY(-50%); /* Correct vertical alignment */
+            font-size: 18px;
+            color: #aaa;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px 15px 15px 40px; /* Add more left padding */
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
         }
 
         button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
+            display: flex; 
+            align-items: center;
+            padding: 10px 20px; 
+            background-color: #00b10ff3; 
+            color: white; /* Button text color */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Change cursor on hover */
+            transition: background-color 0.3s; /* Smooth background color transition */
+        }
+
+        button i {
+            margin-right: 8px; /* Add space between icon and text */
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #00b10ff3; /* Darken the button on hover */
         }
 
         .toggle-link {
-            display: block;
             margin-top: 10px;
             text-align: center;
             font-size: 14px;
-            color: #007bff;
+            color: #00b10ff3;
             cursor: pointer;
+            transition: color 0.3s ease;
         }
 
         .toggle-link:hover {
-            text-decoration: underline;
+            color: #00b10ff3;
         }
 
         #video, #video-login {
             width: 100%;
-            max-width: 300px;
+            max-width: 300px; /* Reduce max width to move it up */
             border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10px; /* Add some spacing above the video */
         }
 
         #status, #status-login {
-            font-size: 18px;
-            color: green;
-            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px; /* Add some space between video and status */
             text-align: center;
+            font-weight: 500;
         }
 
         .canvas-container {
@@ -113,47 +203,89 @@
 
         h3 {
             margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 500;
         }
 
-        .container {
-            flex-direction: row;
+        /* Additional responsive improvements */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                border-radius: 20px;
+            }
+
+            .form-column {
+                border-radius: 20px 20px 0 0;
+            }
+
+            .camera-column {
+                border-radius: 0 0 20px 20px;
+            }
+
+            #video, #video-login {
+                max-width: 250px; /* Further reduce width for mobile */
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Face Authentication POC</h1>
-
-    <!-- Registration form with camera on right -->
-    <div class="container" id="register-container">
-        <div class="column form-column">
-            <h3>Register</h3>
-            <input type="text" id="register-username" placeholder="Enter username" />
-            <button onclick="register()">Register</button>
-            <div class="toggle-link" onclick="toggleAuth()">Already have an account? Login</div>
+    <!-- Header Section -->
+    <header>
+        <img src="static/sih.png" alt="SIH Logo">
+        <div>
+            <h1>Encrypt-o-Saurus</h1>
+            <p>Functional Solution for ML Model Security</p>
         </div>
-        <div class="column camera-column">
-            <video id="video" autoplay></video>
-            <canvas id="canvas" class="canvas-container"></canvas>
-            <div id="status">Waiting for face authentication...</div>
+        <img src="static/logo.png" alt="Logo">
+    </header>
+
+    <!-- Background Video -->
+    <video id="background-video" autoplay muted loop>
+        <source src="static/video.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <h1>Face Authentication POC</h1>
+
+        <!-- Registration form with camera on right -->
+        <div class="container" id="register-container">
+            <div class="column form-column">
+                <h3><i class="fas fa-user-plus"></i> Register</h3>
+                <div style="position: relative;">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="register-username" placeholder="Enter username" />
+                </div>
+                <button onclick="register()"><i class="fas fa-check-circle"></i> Register</button>
+                <div class="toggle-link" onclick="toggleAuth()">Already have an account? Login</div>
+            </div>
+            <div class="column camera-column">
+                <video id="video" autoplay></video>
+                <canvas id="canvas" class="canvas-container"></canvas>
+                <div id="status">Ready for face authentication...</div> <!-- Updated status text -->
+            </div>
+        </div>
+
+        <!-- Login form with camera on left -->
+        <div class="container auth-hidden" id="login-container">
+            <div class="column camera-column">
+                <video id="video-login" autoplay></video>
+                <canvas id="canvas-login" class="canvas-container"></canvas>
+                <div id="status-login">Ready for face authentication...</div> <!-- Updated status text -->
+            </div>
+            <div class="column form-column">
+                <h3><i class="fas fa-sign-in-alt"></i> Login</h3>
+                <div style="position: relative;">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="login-username" placeholder="Enter username" />
+                </div>
+                <button onclick="login()"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <div class="toggle-link" onclick="toggleAuth()">Don't have an account? Register</div>
+            </div>
         </div>
     </div>
-
-    <!-- Login form with camera on left -->
-    <div class="container auth-hidden" id="login-container">
-        <div class="column camera-column">
-            <video id="video-login" autoplay></video>
-            <canvas id="canvas-login" class="canvas-container"></canvas>
-            <div id="status-login">Waiting for face authentication...</div>
-        </div>
-        <div class="column form-column">
-            <h3>Login</h3>
-            <input type="text" id="login-username" placeholder="Enter username" />
-            <button onclick="login()">Login</button>
-            <div class="toggle-link" onclick="toggleAuth()">Don't have an account? Register</div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
     <script>
@@ -243,5 +375,6 @@
         initializeModel();
         initializeCamera('video'); // Initialize camera for registration form
     </script>
+
 </body>
 </html>
