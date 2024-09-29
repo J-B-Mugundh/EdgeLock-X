@@ -3,80 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Home</title>
+    <title>Encrypt-o-Saurus | Secure ML Model Solution</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f06, #ff9a9e);
+            font-family: 'Open Sans', sans-serif;
             margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
+            padding: 0;
+            background: #ffffff;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(to right, #4caf50, #ff9800);
+            animation: gradient 15s ease infinite;
             overflow: hidden;
+            position: relative;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 2rem;
+            position: relative;
         }
 
         .container {
-            text-align: center;
-            max-width: 600px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #4caf50;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .section img {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin: 0;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 1s;
+            transform: translateY(20px);
+            transition: all 0.6s ease-in-out;
         }
 
-        p {
-            font-size: 1.2rem;
-            margin: 20px 0;
+        .features {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .feature-box {
+            flex: 1;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f5f5f5;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 2s;
+            transform: translateY(50px) scale(0.9);
+            transition: all 0.8s ease-out;
+        }
+        .image-container {
+    text-align: center;
+}
+
+.image-container img {
+    max-width: 50%; 
+    height: auto; 
+}
+
+
+        .feature-box h3 {
+            font-size: 1.5rem;
+            color: #ff9800;
+            margin-bottom: 15px;
         }
 
-        button {
-            padding: 10px 20px;
+        .feature-box p {
             font-size: 1rem;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 3s;
+            color: #555;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .section.visible h2, .section.visible p, .section.visible img, .feature-box.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        footer {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome Home!</h1>
-        <p>You have successfully logged in.</p>
-        <button onclick="window.location.href='/'">Back to Login</button>
-    </div>
+    <header style="width: 100%; background: linear-gradient(to right, #4caf50, #ff9800); padding: 20px; display: flex; justify-content: space-between; align-items: center; color: white; box-sizing: border-box;">
+        <img src="static/sih.png" alt="SIH Logo" style="max-width: 15%; height: auto; flex-shrink: 0;">
+        <div style="text-align: center; flex-grow: 1;">
+            <h1 style="margin: 0; font-size: 3rem;">Encrypt-o-Saurus</h1>
+            <p style="margin: 0; font-size: 2rem;">Functional Solution for ML Model Security</p>
+        </div>
+        <img src="static/logo.png" alt="Logo" style="max-width: 15%; height: auto; flex-shrink: 0;">
+    </header>
+    
+    
+    
+    
+<div class="container">
+    <section class="section" id="intro">
+        <h2>Welcome to Our Secure ML Model Solution</h2>
+        <p>
+            At Encrypt-o-Saurus, our goal is to revolutionize the way machine learning models are protected, ensuring secure execution, optimized performance, and enhanced protection against tampering.
+        </p>
+        <p>
+            Whether you're dealing with sensitive data in financial services or handling critical models for authentication, our cutting-edge techniques ensure that your models remain safe without compromising on speed or functionality.
+        </p>
+    </section>
+
+    <section class="section" id="features">
+        <h2>Unique Selling Points</h2>
+        <div class="features">
+            <div class="feature-box">
+                <h3>Optimized Model Handling</h3>
+                <p>We efficiently optimize the model's size using compressed snapshots, ensuring smooth performance in low-bandwidth environments.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Secure Execution</h3>
+                <p>Our solution features TEE-based decryption and in-memory execution, safeguarding sensitive data in real-time.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Enhanced Protection</h3>
+                <p>Advanced obfuscation and real-time integrity checks protect your models from tampering and reverse engineering.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="architecture">
+        <h2>Architecture Diagram</h2>
+        <p>
+            Our architecture is designed to handle model storage, decryption, and execution in the browser while maintaining a high degree of security.
+        </p>
+        <img src="static/arch.png" alt="Architecture Diagram">
+    </section>
+
+    <section class="section" id="approach">
+        <h2>Our Approach to Solving the Problem</h2>
+        <p>
+            Encrypt-o-Saurus leverages cutting-edge technology to address the complexities of securing ML models. Our approach includes model size optimization, secure browser caching, and in-memory execution to eliminate the risks of persistent storage.
+        </p>
+        <div class="image-container">
+            <img src="static/image.png" alt="Solution Approach Diagram">
+        </div>
+        
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2024 Encrypt-o-Saurus. All rights reserved.</p>
+</footer>
+
+<script>
+    // Add smooth transition on scroll
+    const sections = document.querySelectorAll('.section, .feature-box');
+    
+    window.addEventListener('scroll', () => {
+        const triggerPoint = window.innerHeight * 0.85;
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop < triggerPoint) {
+                section.classList.add('visible');
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
